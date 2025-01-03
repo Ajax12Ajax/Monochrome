@@ -1,10 +1,6 @@
 package com.pixelvalue.monochrome;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.util.Log;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -23,24 +19,5 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        checkSystemWritePermission();
-    }
-
-    static public boolean retVal = true;
-
-    private void checkSystemWritePermission() {
-        retVal = Settings.System.canWrite(this);
-        Log.d("TAG", ": " + retVal);
-        if (!retVal) {
-            openAndroidPermissionsMenu();
-        }
-    }
-
-    private void openAndroidPermissionsMenu() {
-        Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setData(Uri.parse("package:" + this.getPackageName()));
-        startActivity(intent);
     }
 }
